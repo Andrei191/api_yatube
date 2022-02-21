@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from posts.models import Comment, Group, Post, User
 from rest_framework import serializers
 
@@ -8,9 +7,10 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ('title', 'slug', 'description', 'posts')
 
+
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField()
-    
+
     class Meta:
         model = Comment
         fields = ('id', 'author', 'post', 'text', 'created')
@@ -20,9 +20,11 @@ class CommentSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField()
     comments = CommentSerializer(read_only=True, many=True)
+
     class Meta:
         model = Post
-        fields = ('id', 'text', 'pub_date', 'author', 'image', 'group', 'comments')
+        fields = ('id', 'text', 'pub_date',
+                  'author', 'image', 'group', 'comments')
         read_only_fields = ('author',)
 
 

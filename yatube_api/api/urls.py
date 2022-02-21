@@ -16,4 +16,4 @@ urlpatterns = [
     path('', include(router.urls)),
     path('posts/<int:post_id>/comments', CommentViewSet),
     path('posts/<int:post_id>/comments/<comment_id>', CommentViewSet)
-] 
+]
